@@ -1,3 +1,7 @@
+# UPDATE: this is now a working hermetic python3 implementation!
+
+Leaving the repro steps below for posterity.
+
 # Repro steps
 
 ## Expected behavior
