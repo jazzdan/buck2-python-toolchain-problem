@@ -3,7 +3,7 @@
 ## Expected behavior
 
 1. Run `buck2 build --target-platforms //:linux //:test` on macOS or `buck2 build --target-platforms //:macos //:test` on Linux
-2. buck2 builds successfully
+2. buck2 builds successfully because it knows to download python for the execution platform as opposed to the target platform.
 
 ## Actual behavior
 
@@ -11,8 +11,7 @@
 2. buck2 fails with the following error:
 
 ```
-Could not connect to buck2 daemon (Could not connect to daemon), starting a new one...
-Connected to new buck2 daemon.
+$ buck2 build --target-platforms //:linux //:test
 Action failed: root//:test (json)
 Local command returned non-zero exit code 126
 Reproduce locally: `env -- 'BUCK_SCRATCH_PATH=buck-out/v2/tmp/root/21b199e98f91f821/__test__/json' buck-out/v2/gen/toolc ...<omitted>... n_file.py --arg hello ./world.txt --filename buck-out/v2/gen/root/21b199e98f91f821/__test__/out.json (run `buck2 log what-failed` to get the full command)`
