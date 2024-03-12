@@ -5,6 +5,20 @@ load(
     "json_file",
 )
 
+platform(
+    name="linux",
+    constraint_values=[
+        "@config//os/constraints:linux",
+    ],
+)
+
+platform(
+    name="macos",
+    constraint_values=[
+        "@config//os/constraints:macos",
+    ],
+)
+
 
 genrule(
     name = "hello_world",
