@@ -1,5 +1,19 @@
-load("@prelude//toolchains:demo.bzl", "system_demo_toolchains")
+load("@prelude//toolchains:genrule.bzl", "system_genrule_toolchain")
+load("@prelude-replay//python:toolchain.bzl", "standalone_python")
 
-# All the default toolchains, suitable for a quick demo or early prototyping.
-# Most real projects should copy/paste the implementation to configure them.
-system_demo_toolchains()
+system_genrule_toolchain(
+    name="genrule",
+    visibility=["PUBLIC"],
+)
+
+standalone_python(
+    name="python",
+    interpreter=select(
+        {
+            "@prelude//os:windows": "python.exe",
+            "DEFAULT": "python3",
+        }
+    ),
+    archive="@prelude-replay//python:python-standalone-archive",
+    visibility=["PUBLIC"],
+)
