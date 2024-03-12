@@ -1,8 +1,25 @@
 load("@prelude//toolchains:genrule.bzl", "system_genrule_toolchain")
+load(
+    "@prelude//toolchains:python.bzl",
+    "system_python_bootstrap_toolchain",
+)
 load("@prelude-replay//python:toolchain.bzl", "standalone_python")
+load("@prelude-replay//json:toolchain.bzl", "json_toolchain")
+
 
 system_genrule_toolchain(
     name="genrule",
+    visibility=["PUBLIC"],
+)
+
+system_python_bootstrap_toolchain(
+    name="python_bootstrap",
+    interpreter=select(
+        {
+            "@prelude//os:windows": "python3.bat",
+            "DEFAULT": "python3",
+        }
+    ),
     visibility=["PUBLIC"],
 )
 
@@ -15,5 +32,10 @@ standalone_python(
         }
     ),
     archive="@prelude-replay//python:python-standalone-archive",
+    visibility=["PUBLIC"],
+)
+
+json_toolchain(
+    name="json",
     visibility=["PUBLIC"],
 )

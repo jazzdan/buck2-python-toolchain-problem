@@ -1,0 +1,4 @@
+export_file(
+    name="json_file.py",
+    visibility=["PUBLIC"],
+)
